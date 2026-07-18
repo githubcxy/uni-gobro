@@ -2,7 +2,7 @@
 export const CONFIG = {
   // TCB 环境配置
   TCB: {
-    ENV: 'your-tcb-env-id', // 替换为你的 TCB 环境 ID
+    ENV: 'csy-hz-d3guudhcs5871eb53', // 您的实际 TCB 环境 ID
     APPID: 'your-wechat-appid', // 替换为你的微信 AppID（可选，用于微信登录）
   },
   

@@ -98,6 +98,13 @@ export const expressApi = {
    */
   async ocrParse(imageUrl) {
     return cloud.ocrParse(imageUrl)
+  },
+
+  /**
+   * 短信内容解析
+   */
+  async smsParse(smsText) {
+    return cloud.smsParse(smsText)
   }
 }
 

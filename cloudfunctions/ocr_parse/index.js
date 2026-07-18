@@ -1,13 +1,6 @@
 // TCB 云函数 - OCR 图片识别
 // 云函数名称：ocr_parse
 
-const tcb = require('@cloudbase/node-sdk')
-const ocr = require('tencentcloud-sdk-nodejs/tencentcloud/services/ocr/v20181119/ocr_client.js')
-
-// 初始化
-const app = tcb.init()
-const db = app.database()
-
 exports.main = async function(event, context) {
   try {
     const { imageUrl } = event
@@ -19,11 +12,15 @@ exports.main = async function(event, context) {
     const response = await require('axios').get(imageUrl, { responseType: 'arraybuffer' })
     const imageBuffer = response.data
 
+    // 使用 TCB 内置的 cloud 对象
+    const cloud = require('cloud')
+    const db = cloud.database()
+
     // 调用腾讯云 OCR
     const clientConfig = {
       credential: {
-        secretId: process.env.SECRET_ID,
-        secretKey: process.env.SECRET_KEY
+        secretId: 'AKID01nLflcaKrAJDtKWTBfuGOHvLXTAcrsf',
+        secretKey: 'naAi7IEwQfgS1NVP5XnqeKy6DEHDvQim'
       },
       region: 'ap-beijing',
       profile: {
@@ -33,6 +30,7 @@ exports.main = async function(event, context) {
       }
     }
 
+    const ocr = require('tencentcloud-sdk-nodejs/tencentcloud/services/ocr/v20181119/ocr_client.js')
     const client = new ocr.Client(clientConfig)
     const params = {
       ImageBase64: Buffer.from(imageBuffer).toString('base64')

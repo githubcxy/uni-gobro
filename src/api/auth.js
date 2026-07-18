@@ -6,17 +6,11 @@ import cloud from '@/src/utils/cloud.js'
  */
 export const authApi = {
   /**
-   * 发送验证码
+   * 登录（账号密码）
    */
-  async sendCode(phone) {
-    return db.callFunction('sms_send', { phone })
-  },
-
-  /**
-   * 登录（手机号 + 验证码）
-   */
-  async login(phone, code) {
-    const res = await db.callFunction('auth_login', { phone, code })
+  async login(username, password) {
+    // 直接调用 auth_login 云函数
+    const res = await db.callFunction('auth_login', { username, password })
     if (res.code === 0) {
       uni.setStorageSync('token', res.data.token)
       uni.setStorageSync('userInfo', res.data.user)

@@ -1,10 +1,9 @@
 {
   "name": "ocr_parse",
   "version": "1.0.0",
-  "description": "OCR 图片识别云函数",
+  "description": "OCR图片识别云函数",
   "main": "index.js",
   "dependencies": {
-    "tencentcloud-sdk-nodejs": "^4.0.73",
-    "axios": "^1.6.0"
+    "tencentcloud-sdk-nodejs": "^4.0.1124"
   }
 }

@@ -83,5 +83,14 @@ export default {
   query,
   update,
   remove,
-  onSnapshot
+  onSnapshot,
+  callFunction(name, data = {}) {
+    return uniCloud.callFunction({
+      name,
+      data
+    }).then(res => {
+      // 确保返回的是 result
+      return res.result || res
+    })
+  }
 }

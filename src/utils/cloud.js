@@ -33,6 +33,13 @@ class CloudFunctions {
   }
 
   /**
+   * 短信内容解析
+   */
+  async smsParse(smsText) {
+    return this.callFunction('sms_parse', { smsText })
+  }
+
+  /**
    * 上传统计信息
    */
   async uploadFile(filePath, cloudPath) {

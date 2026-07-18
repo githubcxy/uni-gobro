@@ -1,38 +1,59 @@
-// TCB 云函数 - 用户登录
+// TCB 云函数 - 用户登录（账号密码）
 // 云函数名称：auth_login
 
 exports.main = async function(event, context) {
   try {
-    const { phone, code } = event
-    if (!phone || !code) {
-      return { code: 1, message: '缺少手机号或验证码' }
+    const { username, password } = event
+    if (!username || !password) {
+      return { code: 1, message: '账号或密码不能为空' }
     }
 
+    // 使用 TCB 内置的 cloud 对象（无需安装 @cloudbase/node-sdk）
+    const cloud = require('cloud')
     const db = cloud.database()
-    const _ = db.command
 
-    // 验证验证码（简单校验，实际应使用云函数验证）
-    // 这里简化处理，实际应调用短信服务验证
-
-    // 查询或创建用户
-    let userRes = await db.collection('user').where({ phone }).get()
-    let user
-
+    // 查询用户
+    let userRes = await db.collection('user').where({ phone: username }).get()
+    
     if (userRes.data.length === 0) {
-      // 新用户
+      // 新用户自动注册，使用手机号作为账号，密码默认为手机号后 6 位
+      const defaultPassword = username.slice(-6)
       const newUser = {
-        phone,
-        nickName: `用户${phone.slice(-4)}`,
+        phone: username,
+        nickName: `用户${username.slice(-4)}`,
+        password: defaultPassword, // 默认密码
         defaultGroupId: '',
         createTime: Date.now()
       }
       const addRes = await db.collection('user').add(newUser)
-      user = { _id: addRes._id, ...newUser }
-    } else {
-      user = userRes.data[0]
+      const user = { _id: addRes._id, ...newUser }
+      
+      // 生成 token
+      const token = `${user._id}-${Date.now()}`
+
+      return {
+        code: 0,
+        message: '注册登录成功',
+        data: {
+          token,
+          user: {
+            _id: user._id,
+            phone: user.phone,
+            nickName: user.nickName,
+            defaultGroupId: user.defaultGroupId
+          }
+        }
+      }
     }
 
-    // 生成简单 token
+    const user = userRes.data[0]
+
+    // 验证密码
+    if (!user.password || user.password !== password) {
+      return { code: 1, message: '密码错误' }
+    }
+
+    // 生成 token
     const token = `${user._id}-${Date.now()}`
 
     return {
@@ -40,7 +61,12 @@ exports.main = async function(event, context) {
       message: '登录成功',
       data: {
         token,
-        user
+        user: {
+          _id: user._id,
+          phone: user.phone,
+          nickName: user.nickName,
+          defaultGroupId: user.defaultGroupId
+        }
       }
     }
   } catch (err) {

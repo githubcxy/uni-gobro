@@ -5,6 +5,11 @@
   "versionName": "1.0.0",
   "versionCode": "100",
   "transformPx": false,
+  "permissions": {
+    "scope.sms": {
+      "description": "用于读取快递短信"
+    }
+  },
   "app-plus": {
     "usingComponents": true,
     "nvueStyleCompiler": "uni-app",
