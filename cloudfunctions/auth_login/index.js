@@ -8,9 +8,26 @@ exports.main = async function(event, context) {
       return { code: 1, message: '账号或密码不能为空' }
     }
 
-    // 使用 TCB 内置的 cloud 对象（无需安装 @cloudbase/node-sdk）
-    const cloud = require('cloud')
-    const db = cloud.database()
+    // 使用 TCB 云函数内置的数据库对象
+    // 检查是否有内置的数据库对象
+    let db
+    if (typeof cloud !== 'undefined' && cloud.database) {
+      db = cloud.database()
+    } else if (typeof wx !== 'undefined' && wx.cloud) {
+      db = wx.cloud.database()
+    } else if (typeof uni !== 'undefined' && uni.cloud) {
+      db = uni.cloud.database()
+    } else {
+      // 如果都没有，尝试直接使用 TCB 内置对象
+      try {
+        const tcb = require('@cloudbase/node-sdk')
+        const app = tcb.init({ env: 'csy-hz-d3guudhcs5871eb53' })
+        db = app.database()
+      } catch (err) {
+        // 如果还不行，使用简单的内存数据库模拟
+        return { code: 1, message: '数据库连接失败，请检查云函数环境配置' }
+      }
+    }
 
     // 查询用户
     let userRes = await db.collection('user').where({ phone: username }).get()
