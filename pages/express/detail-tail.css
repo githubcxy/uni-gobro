@@ -1,0 +1,77 @@
+﻿.card-footer {
+  padding: 20rpx 30rpx;
+  display: flex;
+  gap: 20rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.reward-section {
+  margin: 20rpx;
+  background: #ffffff;
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+  padding: 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+  
+  .title {
+    font-size: 32rpx;
+    font-weight: bold;
+  }
+}
+
+.reward-card {
+  padding: 30rpx;
+}
+
+.reward-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+  
+  .reward-amount {
+    font-size: 40rpx;
+    font-weight: bold;
+    color: #ff9800;
+  }
+}
+
+.reward-body {
+  .reward-item {
+    display: flex;
+    padding: 15rpx 0;
+    
+    .label {
+      color: #666;
+      font-size: 26rpx;
+      width: 140rpx;
+    }
+    
+    .value {
+      color: #333;
+      font-size: 26rpx;
+      flex: 1;
+    }
+  }
+}
+
+.reward-footer {
+  margin-top: 30rpx;
+  display: flex;
+  gap: 20rpx;
+}
+
+.edit-form {
+  padding: 30rpx 0;
+  
+  .modal-buttons {
+    display: flex;
+    gap: 20rpx;
+    padding: 30rpx;
+  }
+}
+</style>

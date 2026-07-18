@@ -1,0 +1,110 @@
+{
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^u-(.*)": "uview-plus/components/u-$1/u-$1.vue"
+    }
+  },
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "快递列表",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/reward/reward",
+      "style": {
+        "navigationBarTitleText": "悬赏广场"
+      }
+    },
+    {
+      "path": "pages/express/add",
+      "style": {
+        "navigationBarTitleText": "录入快递"
+      }
+    },
+    {
+      "path": "pages/mine/mine",
+      "style": {
+        "navigationBarTitleText": "个人中心"
+      }
+    },
+    {
+      "path": "pages/auth/login",
+      "style": {
+        "navigationBarTitleText": "登录",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/group/create",
+      "style": {
+        "navigationBarTitleText": "创建群组"
+      }
+    },
+    {
+      "path": "pages/group/detail",
+      "style": {
+        "navigationBarTitleText": "群组详情"
+      }
+    },
+    {
+      "path": "pages/express/detail",
+      "style": {
+        "navigationBarTitleText": "快递详情"
+      }
+    },
+    {
+      "path": "pages/reward/publish",
+      "style": {
+        "navigationBarTitleText": "发布悬赏"
+      }
+    },
+    {
+      "path": "pages/reward/order-detail",
+      "style": {
+        "navigationBarTitleText": "订单详情"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-gobro",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#909399",
+    "selectedColor": "#2979ff",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/tabbar/home.png",
+        "selectedIconPath": "static/tabbar/home-active.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/reward/reward",
+        "iconPath": "static/tabbar/reward.png",
+        "selectedIconPath": "static/tabbar/reward-active.png",
+        "text": "悬赏"
+      },
+      {
+        "pagePath": "pages/express/add",
+        "iconPath": "static/tabbar/add.png",
+        "selectedIconPath": "static/tabbar/add-active.png",
+        "text": "录入"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "iconPath": "static/tabbar/mine.png",
+        "selectedIconPath": "static/tabbar/mine-active.png",
+        "text": "我的"
+      }
+    ]
+  }
+}
