@@ -19,8 +19,8 @@ exports.main = async function(event, context) {
     // 调用腾讯云 OCR
     const clientConfig = {
       credential: {
-        secretId: 'AKID01nLflcaKrAJDtKWTBfuGOHvLXTAcrsf',
-        secretKey: 'naAi7IEwQfgS1NVP5XnqeKy6DEHDvQim'
+        secretId: process.env.SECRET_ID,
+        secretKey: process.env.SECRET_KEY
       },
       region: 'ap-beijing',
       profile: {
